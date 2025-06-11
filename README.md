@@ -19,5 +19,42 @@ Quiz Master is a Python-based application for creating, managing, and taking qui
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/yourusername/quiz-master.git
+   git clone https://github.com/sub-shi/Quiz-Master-Web-App.git
    cd "Quiz Master"
+   git checkout master
+   ```
+
+2. **(Optional) Create and activate a virtual environment:**
+   ```sh
+   python -m venv venv
+   venv\Scripts\activate
+   ```
+
+3. **Install dependencies:**
+   ```sh
+   pip install -r requirements.txt
+   ```
+
+4. **Run the application:**
+   ```sh
+   python main.py
+   ```
+
+## Project Structure
+
+```
+Quiz Master/
+├── main.py
+├── requirements.txt
+├── README.md
+├── .gitignore
+└── ...
+```
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the MIT License.
