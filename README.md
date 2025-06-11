@@ -21,7 +21,7 @@ Quiz Master is a Python-based application for creating, managing, and taking qui
    ```sh
    git clone https://github.com/sub-shi/Quiz-Master-Web-App.git
    cd "Quiz Master"
-   git checkout master
+   git checkout main
    ```
 
 2. **(Optional) Create and activate a virtual environment:**
