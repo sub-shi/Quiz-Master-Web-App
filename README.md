@@ -37,14 +37,14 @@ Quiz Master is a Python-based application for creating, managing, and taking qui
 
 4. **Run the application:**
    ```sh
-   python main.py
+   python app.py
    ```
 
 ## Project Structure
 
 ```
 Quiz Master/
-├── main.py
+├── app.py
 ├── requirements.txt
 ├── README.md
 ├── .gitignore
