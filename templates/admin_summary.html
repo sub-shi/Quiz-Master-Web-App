@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Summary</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 20px;
+            color: white;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1000px;
+            text-align: center;
+        }
+        
+        .navbar {
+            background-color: #3498db;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            width: 95%;
+            color: white;
+            max-width: 1000px;
+            margin: 15px auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+        }
+
+        .navbar a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Graph Section */
+        .chart-section {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        .chart-container {
+            flex: 1;
+            min-width: 320px;
+            max-width: 48%; /* Ensures two graphs fit side by side */
+            padding: 20px;
+            background-color: #e5eee5;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            color: black
+        }
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #aaa;
+            text-align: center;
+        }
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <nav class="navbar">
+        <h3>Summary</h3>
+        <a href="admin_dashboard">Home</a>
+        <a href="admin_quiz">Quiz</a>
+        <a href="admin_summary">Summary</a>
+        <a href="/logout">Logout</a>
+        <form action="/admin_search" method="POST">
+            <input type="text" name="query" placeholder="Search user/Subject/Quiz">
+            <button type="submit">Search</button>
+        </form>
+    </nav>
+    <h2>Admin Summary</h2>
+
+    <!-- Graphs Section -->
+    <div class="chart-section">
+        <!-- Subject-Wise Top Scores (Bar Chart) -->
+        <div class="chart-container">
+            <h3>Subject-Wise Top Scores</h3>
+            <canvas id="topScoreChart"></canvas>
+        </div>
+
+        <!-- Subject-Wise Quiz Attempts (Pie Chart) -->
+        <div class="chart-container">
+            <h3>Subject-Wise Quiz Attempts</h3>
+            <canvas id="quizAttemptsChart"></canvas>
+        </div>
+    </div>
+
+    <footer>
+        © 2025 Quiz Master. All Rights Reserved. | <a href="/privacy-policy">Privacy Policy</a>
+    </footer>
+</div>
+
+<script>
+    // Sample Data (Replace with actual data from backend)
+    const adminData = {{ admin_data | tojson }};
+
+    // Subject-Wise Top Scores Chart (Bar Chart)
+    const subjectNames = adminData.map(item => item.subject);
+    const topScores = adminData.map(item => item.topScore);
+
+    const topScoreCtx = document.getElementById('topScoreChart').getContext('2d');
+    new Chart(topScoreCtx, {
+        type: 'bar',
+        data: {
+            labels: subjectNames,
+            datasets: [{
+                label: 'Top Score (%)',
+                data: topScores,
+                backgroundColor: '#6a11cb',
+                borderColor: '#2575fc',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: { 
+                    beginAtZero: true, 
+                    max: 100 
+                }
+            }
+        }
+    });
+
+    // Subject-Wise Quiz Attempts Chart (Pie Chart)
+    const attempts = adminData.map(item => item.attempts);
+
+    const attemptsCtx = document.getElementById('quizAttemptsChart').getContext('2d');
+    new Chart(attemptsCtx, {
+        type: 'pie',
+        data: {
+            labels: subjectNames,
+            datasets: [{
+                label: 'Attempts',
+                data: attempts,
+                backgroundColor: ['#3498db', '#e74c3c', '#f1c40f', '#2ecc71', '#9b59b6']
+            }]
+        }
+    });
+</script>
+
+</body>
+</html>

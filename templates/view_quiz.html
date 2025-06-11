@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        h2 {
+            margin-top: 0;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .details {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: #fafafa;
+            font-size: 16px;
+            color: #555;
+        }
+        .details span {
+            font-weight: bold;
+            color: #333;
+        }
+        .btn-close {
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 15px;
+        }
+        .btn-close:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Quiz Details</h2>
+
+    <div class="details">
+        <p><span>ID:</span> {{ data.id }}</p>
+        <p><span>Subject:</span> {{ data.subject }}</p>
+        <p><span>Chapter:</span> {{ data.chapter }}</p>
+        <p><span>Number of Questions:</span> {{ data.number_of_questions }}</p>
+        <p><span>Scheduled Date:</span> {{ data.scheduled_date }}</p>
+        <p><span>Duration:</span> {{ data.duration }}</p>
+    </div>
+
+    <button class="btn-close" onclick="closeQuiz()">Close</button>
+</div>
+
+<script>
+    function closeQuiz() {
+        // alert("Closing quiz details...");
+        // You can redirect to another page or close the modal here
+        window.history.back(); // Go back to the previous page
+    }
+</script>
+
+</body>
+</html>

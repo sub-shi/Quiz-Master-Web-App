@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+        }
+    
+        /* Centered Headings */
+        h2 {
+            background-color: #3498db; /* Blue background */
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: fit-content;
+            margin: 20px auto; /* Centering the heading */
+        }
+    
+        /* Form Container */
+        form {
+            background: white;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            text-align: left;
+            width: 400px;
+            margin: 0 auto; /* Centering the form */
+        }
+    
+        /* Form Labels */
+        label {
+            font-weight: bold;
+            display: block; /* Ensures labels are block elements */
+            margin-bottom: 5px; /* Adds spacing below each label */
+            text-align: left; /* Aligns labels to the left */
+        }
+    
+        /* Input Fields */
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    
+        textarea {
+            resize: none; /* Prevents resizing of the textarea */
+        }
+    
+        /* Buttons */
+        button {
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 10px; /* Adds spacing above buttons */
+            transition: transform 0.2s ease-in-out; /* Smooth scaling effect on hover */
+        }
+    
+        /* Save Button */
+        button[type="submit"] {
+            background-color: #2ecc71; /* Green background for submit button */
+            color: white; /* White text color */
+        }
+    
+        /* Cancel Button */
+        button[type="button"] {
+            background-color: #ff0000; /* Red background for cancel button */
+            color: white; /* White text color */
+        }
+    
+        button:hover {
+            transform: scale(1.05); /* Slightly enlarges button on hover */
+        }
+    </style>
+    
+    
+    
+</head>
+
+<body>
+
+    <center>
+        <h2>Create New Questions</h2>
+    </center>
+    <center>
+        <form action="/create_questions" method="post">
+            <div>
+                <label for="id">Quiz Id:</label>
+                <input type="text" id="id" name="id" required>
+            </div>
+            <br>
+            <div>
+                <label for="title">Question title:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <br>
+            <div>
+                <center>
+                    <label for="statement">Question Statement:</label>
+                    <textarea id="statement" name="statement" rows="5" cols="15"></textarea>
+                </center>
+            </div>
+            <br>
+            <div>
+                <h2>Single Option Correct</h2>
+            </div>
+            <div>
+                <label for="options">OPTION 1:</label>
+                <input type="text" id="options" name="op1" options required>
+            </div>
+            <br>
+            <div>
+                <label for=" options">OPTION 2:</label>
+                <input type="text" id="options" name="op2" options required>
+            </div>
+            <br>
+            <div>
+                <label for=" options">OPTION 3:</label>
+                <input type="text" id="options" name="op3" options required>
+            </div>
+            <br>
+            <div>
+                <label for=" options">OPTION 4:</label>
+                <input type="text" id="options" name="op4" options required>
+            </div>
+            <br>
+            <div>
+                <label for=" options">Correct Option:</label>
+                <select id="options" name="options" required>
+                    <option selected>select option</option>
+                    <option value="1">Option1</option>
+                    <option value="2">Option2</option>
+                    <option value="3">Option3</option>
+                    <option value="4">Option4</option></select>
+            </div>
+            <br>
+            <br>
+
+            <center><button type="submit">Save</button>
+                <button type="submit" style = "background-color:#ff0000;">Cancel</button>
+            </center>
+    </center>
+
+</html>
+</form>
+</body>

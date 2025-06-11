@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1000px;
+        }
+
+        h2,
+        h3 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            background-color: #3498db;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 8px;
+            transition: background-color 0.2s;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            background-color: #2980b9;
+        }
+
+        form {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"],
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover,
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f9;
+            color: #333;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .btn-view {
+            background-color: #3498db;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        .btn-view:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-start {
+            background-color: #e74c3c;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        .btn-start:hover {
+            background-color: #c0392b;
+        }
+
+        .welcome {
+            text-align: center;
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        
+        <nav>
+            <a href="user_dashboard">Home</a>
+            <a href="user_scores">Scores</a>
+            <a href="user_summary">Summary</a>
+            <a href="/">Logout</a>
+        </nav>
+
+        
+        <form action="/usersearch" method="POST">
+            <input type="text" name="query" placeholder="Search Subject/Quiz" required>
+            <button type="submit">Search</button>
+        </form>
+
+        <h2>Welcome, User!</h2>
+
+        <!-- Upcoming Quizzes Section -->
+        <h3>Upcoming Quizzes</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Quiz Name</th>
+                    <th>Number of Questions</th>
+                    <th>Date</th>
+                    <th>Duration</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, question_count, quiz_date, quiz_name, quiz_duration in upcoming %}
+                <tr>
+                    <td>{{ id }}</td>
+                    <td>{{ quiz_name }}</td>
+                    <td>{{ question_count }}</td>
+                    <td>{{ quiz_date.split('T')[0] }} {{ quiz_date.split('T')[1][:5] }}</td>
+                    <td>{{ quiz_duration }} min</td>
+                    <td>
+                        <button class="btn-view" onclick="viewQuiz({{ id }})">View</button>
+                        <button class="btn-start" onclick="startQuiz({{ id }})">Start</button>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">No upcoming quizzes.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Past Quizzes Section -->
+        <h3>Past Quizzes</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Quiz Name</th>
+                    <th>Number of Questions</th>
+                    <th>Date</th>
+                    <th>Duration</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for id, question_count, quiz_date, quiz_name, quiz_duration in past %}
+                <tr>
+                    <td>{{ id }}</td>
+                    <td>{{ quiz_name }}</td>
+                    <td>{{ question_count }}</td>
+                    <td>{{ quiz_date.split('T')[0] }} {{ quiz_date.split('T')[1][:5] }}</td>
+                    <td>{{ quiz_duration }} min</td>
+                    <td>
+                        <button class="btn-view" onclick="viewQuiz({{ id }})">View</button>
+                        <button class="btn-start" onclick="startQuiz({{ id }})">Start</button>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">No past quizzes.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Function to view quiz details
+        function viewQuiz(quizId) {
+            // alert(`Viewing details for Quiz ID: ${quizId}`);
+            window.location.href = `/quiz_detail/${quizId}`;
+        }
+
+        // Function to start a quiz
+        function startQuiz(quizId) {
+            const confirmStart = confirm(`Are you sure you want to start Quiz ID: ${quizId}?`);
+            if (confirmStart) {
+                window.location.href = `/start-quiz/${quizId}`;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

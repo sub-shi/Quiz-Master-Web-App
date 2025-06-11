@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 6px;
+            color: #555;
+            text-align: left;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+        input:focus, 
+        select:focus {
+            border-color: #6a11cb;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .link {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #555;
+        }
+        .link a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+        .link a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #aaa;
+            text-align: center;
+        }
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <form action="/register" method="post">
+        <h2>Register</h2>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+
+        
+        <div>
+            <label for="qualification">Qualification:</label>
+            <select id="qualification" name="qualification" required>
+                <option value="" disabled selected>Select your Qualification</option>
+                <option value="school">School</option>
+                <option value="bachelors">College (Bachelors)</option>
+                <option value="masters">College (Masters)</option>
+                <option value="phd">College (PhD)</option>
+                <option value="job">Job</option>
+            </select>
+        </div>
+
+        
+        <div>
+            <label for="dob">Date of birth:</label>
+            <input type="date" id="dob" name="dob" required>
+        </div>
+
+        
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        
+        <div>
+            <label for="cpassword">Confirm Password:</label>
+            <input type="password" id="cpassword" name="cpassword" required>
+        </div>
+
+        
+        <button type="submit">Register</button>
+
+        
+        <div class="link">
+            Already have an account? <a href="userlogin">Log in</a>
+        </div>
+    </form>
+
+</div>
+
+<script>
+    // Optional JavaScript for password confirmation validation
+    const form = document.querySelector('form');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('cpassword');
+
+    form.addEventListener('submit', (e) => {
+        if (password.value !== confirmPassword.value) {
+            e.preventDefault(); // Prevent form submission
+            alert('Passwords do not match. Please try again.');
+            confirmPassword.focus();
+        }
+    });
+</script>
+
+</body>
+
+</html>
